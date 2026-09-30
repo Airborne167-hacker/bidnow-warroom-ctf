@@ -1,0 +1,31 @@
+# Go build files
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Go test/build output
+*.test
+*.out
+
+# Local environment / secrets
+.env
+.env.*
+!.env.example
+
+# IDE / editor files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Local database files
+*.db
+*.sqlite
+*.sqlite3
+
+# CTF solutions - keep private
+SOLUTIONS.md

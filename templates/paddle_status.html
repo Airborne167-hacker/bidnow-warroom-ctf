@@ -1,0 +1,33 @@
+{{define "paddle_status"}}
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Paddle Status &mdash; BidNow Live</title>
+<link rel="stylesheet" href="/static/style.css"></head>
+<body class="bn-body">
+{{template "nav" .}}
+<section class="bn-page">
+  <div class="bn-page-inner bn-narrow">
+    <h1>Check Your Paddle Status</h1>
+    <p class="bn-muted">Enter your paddle number to see your current standing for tonight.</p>
+    <form class="bn-form" method="post" action="/paddle-status">
+      <label for="paddle_no">Paddle Number</label>
+      <input id="paddle_no" name="paddle_no" type="text" placeholder="e.g. PDL-1001" autocomplete="off">
+      <button class="bn-btn-primary" type="submit">Check status</button>
+    </form>
+
+    {{if .Queried}}
+      {{if .Result}}
+      <div class="bn-flagcard">
+        <p class="bn-flagcard-kicker">Paddle {{.Result.PaddleNo}}</p>
+        <p><b>Bidder:</b> {{.Result.Name}}</p>
+        {{if .Result.Note}}<p><b>Internal note:</b> {{.Result.Note}}</p>{{end}}
+      </div>
+      {{else}}
+      <p class="bn-form-error">No paddle found with that number.</p>
+      {{end}}
+    {{end}}
+  </div>
+</section>
+{{template "foot" .}}
+</body></html>
+{{end}}

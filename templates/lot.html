@@ -1,0 +1,43 @@
+{{define "lot"}}
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{.Lot.Title}} &mdash; BidNow Live</title>
+<link rel="stylesheet" href="/static/style.css">
+<script>window.BIDNOW_SECRET = {{.Secret}};</script>
+</head>
+<body class="bn-body">
+{{template "nav" .}}
+<section class="bn-page">
+  <div class="bn-page-inner">
+    <div class="bn-lot-hero">
+      <div class="bn-lot-hero-emoji">{{.Lot.Emoji}}</div>
+      <div>
+        <h1>{{.Lot.Title}}</h1>
+        <p class="bn-lot-hero-tagline">{{.Lot.Tagline}}</p>
+        <p class="bn-lot-hero-price">Current bid: &#8377;{{.Lot.CurrentBid}}</p>
+        <p>{{.Lot.Description}}</p>
+      </div>
+    </div>
+    <div class="bn-reports">
+      <h2 class="bn-section-title">Condition reports &amp; questions</h2>
+      {{range .Reports}}
+      <div class="bn-report">
+        <p class="bn-report-author">{{.Author}} <span class="bn-muted bn-small">&middot; {{.CreatedAt}}</span></p>
+        <div class="bn-report-content">{{.Content}}</div>
+      </div>
+      {{else}}
+      <p class="bn-muted">No reports yet &mdash; be the first.</p>
+      {{end}}
+      <form class="bn-form bn-report-form" action="/lot/{{.Lot.ID}}" method="post">
+        <label for="author">Your name</label>
+        <input id="author" name="author" type="text" placeholder="e.g. Kabir R.">
+        <label for="content">Condition report / question</label>
+        <textarea id="content" name="content" rows="3" placeholder="Ask about condition, provenance, etc."></textarea>
+        <button class="bn-btn-primary" type="submit">Post report</button>
+      </form>
+    </div>
+  </div>
+</section>
+{{template "foot" .}}
+</body></html>
+{{end}}

@@ -1,0 +1,22 @@
+{{define "crash"}}
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>500 &mdash; Internal Error</title>
+<link rel="stylesheet" href="/static/style.css"></head>
+<body class="bn-body">
+<div class="bn-crash-wrap">
+  <h1>500 Internal Server Error</h1>
+  <p class="bn-muted">DEVELOPER MODE OUTPUT (should never be shown to end users)</p>
+  <pre class="bn-crash-trace">
+panic: strconv.Atoi: parsing "{{.BadInput}}": invalid syntax
+
+  at lotHandler (handlers.go:158)
+  input.raw     = "{{.BadInput}}"
+  parse.error   = "{{.ParseErr}}"
+  env           = "production (debug output left ON)"
+  internal.token = "{{.DebugFlag}}"
+  </pre>
+  <a href="/" class="bn-btn-primary" style="display:inline-block;text-decoration:none;margin-top:20px">&larr; Back to BidNow Live</a>
+</div>
+</body></html>
+{{end}}

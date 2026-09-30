@@ -1,0 +1,86 @@
+{{define "warroom"}}
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>War Room &mdash; BidNow Live Investigation</title>
+<link rel="stylesheet" href="/static/style.css"></head>
+<body class="wr-body">
+
+<header class="wr-topbar">
+  <a href="/" class="wr-back">&#8592; Back to BidNow Live</a>
+  <div class="wr-center"><span class="wr-live-dot"></span><span class="wr-live">LIVE INVESTIGATION</span></div>
+  <span class="wr-brand">BidNow War Room</span>
+</header>
+
+<section class="wr-intro">
+  <div class="wr-intro-inner">
+    <p class="wr-case-tag">INCIDENT #BN-0928 &bull; RESTRICTED</p>
+    <h1 class="wr-title">War Room Console</h1>
+    <p class="wr-typed" id="wr-typed" data-full="21:32. BidNow Live's ₹4.7 Crore mega auction opens in under thirty minutes. A consignor just called the floor desk in a panic: someone tried to access their paddle account twice tonight, and failed both times. Five leads have come in from the floor team. Work through each one, confirm what's actually exploitable, and log it before the gavel falls.">&nbsp;</p>
+    <div class="wr-progress-wrap">
+      <div class="wr-progress-meta">
+        <span id="wr-prog-label">{{.Found}} / {{.Total}} leads closed</span>
+      </div>
+      <div class="wr-progress-bar"><div class="wr-progress-fill" id="wr-prog-fill" style="width: {{.Found}}0%"></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="wr-leads">
+  <div class="wr-leads-inner">
+    {{range .Leads}}
+    <article class="wr-lead" id="lead-{{.ID}}" data-id="{{.ID}}">
+      <button class="wr-lead-head" type="button" data-toggle="{{.ID}}">
+        <span class="wr-lead-tag">LEAD-{{.Number}}</span>
+        <span class="wr-lead-text">
+          <span class="wr-lead-name">{{.CodeName}}</span>
+          <span class="wr-lead-cat">{{.Category}}</span>
+        </span>
+        <span class="wr-lead-status" id="status-{{.ID}}">UNCONFIRMED</span>
+      </button>
+
+      <div class="wr-lead-body" id="body-{{.ID}}">
+        <p class="wr-lead-brief">{{.Briefing}}</p>
+        {{if .TargetURL}}
+        <a class="wr-target-link" href="{{.TargetURL}}" target="_blank" rel="noopener">{{.TargetLabel}} &nearr;</a>
+        {{else}}
+        <p class="wr-target-note">&#9656; {{.TargetLabel}}</p>
+        {{end}}
+
+        <div class="wr-hints" id="hints-{{.ID}}"></div>
+        <button class="wr-hint-btn" type="button" data-hint-btn="{{.ID}}">&#128172; Pull informant thread</button>
+
+        <div class="wr-submit-row">
+          <input class="wr-flag-in" type="text" id="flag-{{.ID}}" placeholder="BIDNOW{...}" autocomplete="off" spellcheck="false">
+          <button class="wr-submit-btn" type="button" data-submit-btn="{{.ID}}">Log evidence</button>
+        </div>
+        <p class="wr-feedback" id="fb-{{.ID}}"></p>
+
+        <div class="wr-debrief" id="debrief-{{.ID}}" style="display:none">
+          <div class="wr-debrief-row">
+            <p class="wr-debrief-label">&#129513; TECHNIQUE USED</p>
+            <p id="technique-{{.ID}}"></p>
+          </div>
+          <div class="wr-debrief-row wr-debrief-fix">
+            <p class="wr-debrief-label">&#128295; THE FIX</p>
+            <p id="fix-{{.ID}}"></p>
+          </div>
+        </div>
+      </div>
+    </article>
+    {{end}}
+  </div>
+</section>
+
+<div class="wr-complete-overlay" id="wr-complete">
+  <div class="wr-complete-card">
+    <p class="wr-complete-tag">ALL LEADS CLOSED</p>
+    <h2>Investigation complete.</h2>
+    <p>Every exploitable path on BidNow Live has been confirmed and logged before tonight's gavel. The floor desk has been notified.</p>
+    <button class="wr-complete-btn" id="wr-complete-close">Back to console</button>
+  </div>
+</div>
+
+<script>window.WR_FOUND = {{.FoundJSON}};</script>
+<script src="/static/app.js"></script>
+</body></html>
+{{end}}

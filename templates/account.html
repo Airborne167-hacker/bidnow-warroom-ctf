@@ -1,0 +1,26 @@
+{{define "account"}}
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>My Account &mdash; BidNow Live</title>
+<link rel="stylesheet" href="/static/style.css"></head>
+<body class="bn-body">
+{{template "nav" .}}
+<section class="bn-page">
+  <div class="bn-page-inner bn-narrow">
+    <h1>Welcome, {{.Sess.DisplayName}}</h1>
+    <p class="bn-muted">Signed in as <code>{{.Sess.LoggedInAs}}</code></p>
+
+    {{if .IsAdmin}}
+    <div class="bn-flagcard">
+      <p class="bn-flagcard-kicker">Admin panel unlocked</p>
+      <p>You reached admin-only content without ever having an admin account.</p>
+      <code class="bn-flag-value">{{.Flag}}</code>
+    </div>
+    {{else}}
+    <p>Regular bidder view &mdash; nothing special here yet. Bidding history is empty, tonight's auction hasn't opened.</p>
+    {{end}}
+  </div>
+</section>
+{{template "foot" .}}
+</body></html>
+{{end}}

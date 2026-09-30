@@ -1,0 +1,31 @@
+{{define "nav"}}
+<header class="bn-nav">
+  <div class="bn-nav-inner">
+    <a class="bn-logo" href="/">
+      <span class="bn-logo-mark">BN</span>
+      <span class="bn-logo-word">BidNow Live</span>
+    </a>
+    <span class="bn-launch-pill">Mega Auction &middot; Tonight 8:00 PM</span>
+    <nav class="bn-links">
+      <a href="/">Lots</a>
+      {{if .Sess.LoggedInAs}}
+        <a href="/account">{{.Sess.DisplayName}}</a>
+        <form action="/logout" method="post" class="bn-inline-form"><button class="bn-link-btn" type="submit">Sign out</button></form>
+      {{else}}
+        <a href="/login">Staff Login</a>
+      {{end}}
+      <a href="/paddle-status">Paddle Status</a>
+    </nav>
+    <a class="bn-console-pill" href="/warroom">&#128225; War Room</a>
+  </div>
+</header>
+{{end}}
+
+{{define "foot"}}
+<footer class="bn-foot">
+  <div class="bn-foot-inner">
+    <p>BidNow Live is a fictional auction platform built for VA Foundations training. All accounts and data are simulated.</p>
+    <a href="/warroom" class="bn-foot-cta">Notice something off with this platform before tonight? &rarr; War Room</a>
+  </div>
+</footer>
+{{end}}

@@ -1,0 +1,32 @@
+{{define "home"}}
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BidNow Live &mdash; Mega Auction Tonight</title>
+<link rel="stylesheet" href="/static/style.css"></head>
+<body class="bn-body">
+{{template "nav" .}}
+<section class="bn-hero">
+  <div class="bn-hero-inner">
+    <p class="bn-hero-kicker">Doors open in a few hours</p>
+    <h1 class="bn-hero-title">Tonight's Mega Auction,<br>₹4.7 Crore across five rare lots.</h1>
+    <p class="bn-hero-sub">BidNow Live goes fully live at 8:00 PM &mdash; the bidding floor, the ledger, the paddle desk, all of it at once. Right now it's just the floor crew, the lots, and whatever hasn't been checked yet.</p>
+  </div>
+</section>
+<section class="bn-catalogue">
+  <div class="bn-catalogue-inner">
+    <h2 class="bn-section-title">Tonight's lots</h2>
+    <div class="bn-lot-grid">
+      {{range .Lots}}
+      <a class="bn-lot-card" href="/lot/{{.ID}}">
+        <div class="bn-lot-emoji">{{.Emoji}}</div>
+        <h3>{{.Title}}</h3>
+        <p class="bn-lot-tagline">{{.Tagline}}</p>
+        <p class="bn-lot-price">&#8377;{{.CurrentBid}}</p>
+      </a>
+      {{end}}
+    </div>
+  </div>
+</section>
+{{template "foot" .}}
+</body></html>
+{{end}}
